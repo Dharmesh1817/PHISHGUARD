@@ -1,0 +1,95 @@
+/* ═══════════════════════════════════════════════════════
+   PhishGuard — Global Stylesheet
+   Supplements the per-template inline styles.
+   Handles Bootstrap overrides + shared utilities.
+═══════════════════════════════════════════════════════ */
+
+/* ── Custom scrollbar ── */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: #05080c; }
+::-webkit-scrollbar-thumb { background: #1a2740; border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: #00d4ff55; }
+
+/* ── Text selection ── */
+::selection {
+  background: rgba(0, 212, 255, 0.25);
+  color: #e8f4ff;
+}
+
+/* ── Bootstrap overrides ── */
+*, *::before, *::after { box-sizing: border-box; }
+
+.container-fluid { padding-left: 0; padding-right: 0; }
+
+/* Disable Bootstrap's default link blue */
+a { color: inherit; }
+
+/* ── Cursor blink utility ── */
+.cursor::after {
+  content: '_';
+  animation: cur 1s step-end infinite;
+}
+@keyframes cur { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+
+/* ── Fade-in animation utility ── */
+.fade-in {
+  animation: fadeIn 0.5s ease both;
+}
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Scan line overlay (subtle) ── */
+.scanlines::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  pointer-events: none;
+  background: repeating-linear-gradient(
+    to bottom,
+    transparent,
+    transparent 2px,
+    rgba(0, 0, 0, 0.03) 2px,
+    rgba(0, 0, 0, 0.03) 4px
+  );
+}
+
+/* ── Glitch text effect ── */
+.glitch {
+  position: relative;
+}
+.glitch::before,
+.glitch::after {
+  content: attr(data-text);
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%;
+  overflow: hidden;
+}
+.glitch::before {
+  color: #ff3c5a;
+  animation: glitch1 3s infinite;
+  clip: rect(0, 900px, 0, 0);
+}
+.glitch::after {
+  color: #00d4ff;
+  animation: glitch2 3s infinite;
+  clip: rect(0, 900px, 0, 0);
+}
+@keyframes glitch1 {
+  0%,94%,100% { clip: rect(0,0,0,0); transform: none; }
+  95% { clip: rect(10px,9999px,30px,0); transform: translateX(-2px); }
+  97% { clip: rect(40px,9999px,60px,0); transform: translateX(2px); }
+}
+@keyframes glitch2 {
+  0%,96%,100% { clip: rect(0,0,0,0); transform: none; }
+  97% { clip: rect(5px,9999px,20px,0); transform: translateX(2px); }
+  99% { clip: rect(50px,9999px,70px,0); transform: translateX(-2px); }
+}
+
+/* ── Responsive typography ── */
+@media (max-width: 480px) {
+  html { font-size: 15px; }
+}
