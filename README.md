@@ -4,6 +4,7 @@
 > Built with Flask · Python 3 · Scikit-learn · NLTK · Bootstrap 5
 
 ---
+<img width="1353" height="582" alt="PhishGuard" src="https://github.com/user-attachments/assets/da3a5d08-5393-4950-911b-34f188f10b35" />
 
 ## Table of Contents
 - [Introduction](#introduction)
